@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Define a method to parse each log entry
+
 def parse_log_entry(log_entry)
     sender = log_entry.match(/\[from:(.*?)\]/)[1]
     receiver = log_entry.match(/\[to:(.*?)\]/)[1]
@@ -7,14 +7,17 @@ def parse_log_entry(log_entry)
     "#{sender},#{receiver},#{flags}"
 end
 
-# Read the log file line by line
-File.open('text_messages.txt', 'r') do |file|
-    file.each_line do |line|
-        # Extract log entry timestamp and content
-        timestamp, log_entry = line.match(/^\w{3} \d{1,2} \d{2}:\d{2}:\d{2} (.*?mdr: .*)$/)[1].split(' ', 2)
-        # Check if it's an SMS transaction
-        if log_entry.include?('Sent SMS') || log_entry.include?('Receive SMS')
-            puts parse_log_entry(log_entry)
-        end
+# Extract the log entry from the command-line argument
+log_entry = ARGV[0]
+
+# Check if the log entry is not nil
+if log_entry
+    # Check if it's an SMS transaction
+    if log_entry.include?('Sent SMS') || log_entry.include?('Receive SMS')
+        puts parse_log_entry(log_entry)
+    else
+        puts "Not an SMS transaction."
     end
+else
+    puts "Usage: ./name 'log_entry'"
 end

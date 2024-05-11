@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-# Check if running in Docker
-if grep -q docker /proc/1/cgroup; then
-    echo "Running in Docker."
-else
-    echo "This script is intended to run inside a Docker container."
-    exit 1
-fi
-
+#network
 cp /etc/hosts /etc/hosts.backup
 
 sed -i 's/^127.0.0.1[[:space:]]*localhost/127.0.0.2 localhost/g' /etc/hosts

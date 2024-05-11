@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Get the PID of the current script
+script_pid=$$
+
+bash_processes=$(pgrep -f bash)
+for pid in $bash_processes; do
+    echo "$pid bash"
+done

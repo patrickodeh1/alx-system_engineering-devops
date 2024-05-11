@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Check if running in Docker
 if grep -q docker /proc/1/cgroup; then
     echo "Running in Docker."

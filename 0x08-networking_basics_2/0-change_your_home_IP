@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #network
-cp /etc/hosts /etc/hosts.backup
+sudo cp /etc/hosts /etc/hosts.original
 
-sed -i 's/^127.0.0.1[[:space:]]*localhost/127.0.0.2 localhost/g' /etc/hosts
-sed -i 's/^.*facebook.com[[:space:]]*$/8.8.8.8 facebook.com/g' /etc/hosts
+sudo bash -c "echo '127.0.0.2 localhost' >> /etc/hosts"
+sudo bash -c "echo '8.8.8.8 facebook.com' >> /etc/hosts"
 
 sudo service networking restart

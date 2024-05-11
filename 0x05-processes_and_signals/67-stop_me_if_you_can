@@ -1,7 +1,3 @@
 #!/usr/bin/env bash
 ## kill running program
-pid=$(pgrep -f "7-highlander")
-
-if [ -n "$pid" ]; then
-    kill -SIGTERM "$pid"
-fi
+pkill -f "7-highlander"

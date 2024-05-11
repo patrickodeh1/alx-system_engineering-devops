@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 #Highlander
-sigterm_handler() {
+function handle_sigterm() {
     echo "I am invincible!!!"
-    exit 0
 }
 
-trap 'sigterm_handler' SIGTERM
+trap 'handle_sigterm' SIGTERM
 
 while true; do
     echo "To infinity and beyond"

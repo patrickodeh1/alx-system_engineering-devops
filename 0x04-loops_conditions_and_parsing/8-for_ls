@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#list files
+
+for file in *; do
+	if [[ ! "$file" == .* && -f "$file" ]]; then
+		name="${file#*-}"
+		echo "$name"
+	fi
+done

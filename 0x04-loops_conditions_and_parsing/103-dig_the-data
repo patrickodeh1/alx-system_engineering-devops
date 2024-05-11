@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 # Use awk to group visitors by IP and HTTP status code, count occurrences, and sort the data
 awk '{ips[$1 " " $9]++} END {for (ip in ips) {print ips[ip] " " ip}}' \
-| sort -rn | head -n 10
+| sort -rn \
+| awk '{printf("%s %s %s\n", $1, substr($2, 1, index($2, " ") - 1), substr($2, index($2, " ") + 1))}' \
+| head -n 10

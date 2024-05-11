@@ -6,3 +6,10 @@ else
     echo "This script is intended to run inside a Docker container."
     exit 1
 fi
+
+cp /etc/hosts /etc/hosts.backup
+
+sed -i 's/^127.0.0.1[[:space:]]*localhost/127.0.0.2 localhost/g' /etc/hosts
+sed -i 's/^.*facebook.com[[:space:]]*$/8.8.8.8 facebook.com/g' /etc/hosts
+
+sudo service networking restart

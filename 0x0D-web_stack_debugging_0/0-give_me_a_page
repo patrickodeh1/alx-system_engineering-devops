@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-docker exec -it <container_id> bash
-systemctl restart apache2
+docker exec -it <container_id> bash -c "systemctl restart apache2 && systemctl status apache2 | grep 'active (running)'"

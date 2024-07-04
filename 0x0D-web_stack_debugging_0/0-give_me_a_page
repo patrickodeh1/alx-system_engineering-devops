@@ -1,0 +1,2 @@
+docker exec -it <container_id> bash
+systemctl restart apache2

@@ -49,4 +49,4 @@ EOL
 # Restarting nginx
 sudo service nginx restart
 
-echo -e "\nCompleted.\n
+echo -e "\nCompleted.\n"

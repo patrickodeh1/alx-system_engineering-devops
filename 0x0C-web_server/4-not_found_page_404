@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Configures a new Ubuntu machine to install Nginx
+# and set up a custom 404 page that returns "Ceci n'est pas une page"
+
+echo -e "Updating and installing Nginx.\n"
+sudo apt-get update -y -qq && sudo apt-get install nginx -y
+
+echo -e "\nSetting up some minor stuff.\n"
+
+# Starting nginx service
+sudo systemctl start nginx
+
+# Allowing nginx on firewall
+sudo ufw allow 'Nginx HTTP'
+
+# Give the user ownership to website files for easy editing
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+# Creating a custom 404 page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+# Updating Nginx configuration to use the custom 404 page
+sudo sed -i '/^}/i \\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\tinternal;\n\t}' /etc/nginx/sites-available/default
+
+# Restarting nginx
+sudo systemctl restart nginx
+
+echo -e "\nCompleted.\n"
+

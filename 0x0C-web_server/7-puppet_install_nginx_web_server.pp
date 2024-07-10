@@ -30,8 +30,15 @@ server {
     location = /redirect_me {
         return 301 http://$host;
     }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+        root /var/www/html;
+        index 404.html;
+    }
 }
-',
+  ',
   notify  => Service['nginx'],
 }
 
@@ -43,7 +50,15 @@ file { '/var/www/html':
 # Create the index.html file with "Hello World!" content
 file { '/var/www/html/index.html':
   ensure  => file,
-  content => 'Hello World!',
+  content => "Hello World!\n",
+  require => File['/var/www/html'],
+  notify  => Service['nginx'],
+}
+
+# Create a custom 404.html page
+file { '/var/www/html/404.html':
+  ensure  => file,
+  content => "Ceci n'est pas une page\n",
   require => File['/var/www/html'],
   notify  => Service['nginx'],
 }

@@ -1,7 +1,21 @@
 #!/usr/bin/env bash
 # Fix Apache and ensure it returns "Hello Holberton"
 
+# Update package lists and install Apache
 apt-get update
 apt-get install apache2 -y
+
+# Start Apache service
 service apache2 start
+
+# Create a simple HTML page
 echo 'Hello Holberton' > /var/www/html/index.html
+
+# Check if Apache is running
+if service apache2 status | grep -q "running"; then
+	  echo "apache2 is running"
+  else
+	    echo "apache2 is NOT running"
+	      exit 1
+fi
+

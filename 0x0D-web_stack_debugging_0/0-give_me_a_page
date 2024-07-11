@@ -1,4 +1,5 @@
-pache and ensure it returns "Hello Holberton"
+#!/usr/bin/env bash
+# Fix Apache and ensure it returns "Hello Holberton"
 
 apt-get update
 apt-get install apache2 -y

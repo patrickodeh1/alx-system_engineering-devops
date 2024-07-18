@@ -1,27 +1,30 @@
-# This Puppet manifest sets up Nginx with a custom HTTP header on a new Ubuntu server
+# Setup New Ubuntu server with nginx
+# and add a custom HTTP header
+
+exec { 'update system':
+        command => '/usr/bin/apt-get update',
+}
 
 package { 'nginx':
-  ensure => installed,
+	ensure => 'installed',
+	require => Exec['update system']
 }
 
-file { '/etc/nginx/conf.d/custom_header.conf':
-  ensure  => file,
-  content => "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    server_name _;
-
-    location / {
-        add_header X-Served-By $hostname;
-    }
-}",
-  require => Package['nginx'],
+file {'/var/www/html/index.html':
+	content => 'Hello World!'
 }
 
-service { 'nginx':
-  ensure => running,
-  enable => true,
-  subscribe => File['/etc/nginx/conf.d/custom_header.conf'],
+exec {'redirect_me':
+	command => 'sed -i "24i\	rewrite ^/redirect_me https://th3-gr00t.tk/ permanent;" /etc/nginx/sites-available/default',
+	provider => 'shell'
 }
 
+exec {'HTTP header':
+	command => 'sed -i "25i\	add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default',
+	provider => 'shell'
+}
+
+service {'nginx':
+	ensure => running,
+	require => Package['nginx']
+}

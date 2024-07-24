@@ -1,34 +1,11 @@
 #!/usr/bin/env bash
-# Check if the password argument is provided
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <mysql_password>"
-    exit 1
-fi
+# backup and compress my databases
 
-MYSQL_PASSWORD=$1
-DATE=$(date +"%d-%m-%Y")
-BACKUP_FILE="backup.sql"
-ARCHIVE_FILE="${DATE}.tar.gz"
+# variables
+day=$(date +"%d")
+month=$(date +"%m")
+year=$(date +"%Y")
+file_name="$day-$month-$year.tar.gz"
 
-# Perform the MySQL dump
-mysqldump -u root -p${MYSQL_PASSWORD} --all-databases > ${BACKUP_FILE}
-
-# Check if mysqldump was successful
-if [ $? -ne 0 ]; then
-    echo "MySQL dump failed!"
-    exit 2
-fi
-
-# Compress the backup file
-tar -czf ${ARCHIVE_FILE} backup.sql
-
-# Check if tar was successful
-if [ $? -ne 0 ]; then
-    echo "Compression failed!"
-    exit 3
-fi
-
-# Remove the uncompressed backup file
-rm backup.sql
-
-echo "Backup and compression successful: ${ARCHIVE_FILE}"
+mysqldump --all-databases -u root --password="$1" > backup.sql
+tar -czvf "$file_name" backup.sql

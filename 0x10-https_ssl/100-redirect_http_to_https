@@ -1,0 +1,33 @@
+# Global settings
+global
+    log 127.0.0.1 local0
+    log 127.0.0.1 local1 notice
+    chroot /var/lib/haproxy
+    stats socket /var/run/haproxy.sock mode 600
+    user haproxy
+    group haproxy
+    daemon
+
+# Default settings
+defaults
+    log     global
+    option  httplog
+    option  dontlognull
+    timeout connect 5000ms
+    timeout client  50000ms
+    timeout server  50000ms
+
+# Frontend to handle HTTP requests and redirect to HTTPS
+frontend http-in
+    bind *:80
+    redirect scheme https code 301 if !{ ssl_fc }
+
+# Frontend to handle HTTPS requests
+frontend https-in
+    bind *:443 ssl crt /etc/ssl/certs/your_domain.pem
+    default_backend servers
+
+# Backend servers
+backend servers
+    server web-01 100.26.227.236:80 check
+    server web-02 54.197.106.162:80 check

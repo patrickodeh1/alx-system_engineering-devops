@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# This script displays DNS information for specified subdomains of a given domain.
+
+# Function to get DNS record
+get_dns_record() {
+    local domain=$1
+    local subdomain=$2
+    local full_domain="${subdomain}.${domain}"
+
+    # Use dig to get DNS information
+    local record=$(dig +short "$full_domain")
+    
+    if [ -z "$record" ]; then
+        echo "The subdomain $subdomain does not exist."
+    else
+        echo "The subdomain $subdomain is a A record and points to $record."
+    fi
+}
+
+# Check for required domain argument
+if [ -z "$1" ]; then
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
+
+domain=$1
+subdomain=$2
+
+# If subdomain is not provided, check default subdomains
+if [ -z "$subdomain" ]; then
+    for sub in www lb-01 web-01 web-02; do
+        get_dns_record "$domain" "$sub"
+    done
+else
+    get_dns_record "$domain" "$subdomain"
+fi

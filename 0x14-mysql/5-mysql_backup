@@ -20,7 +20,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Compress the backup file
-tar -czf ${ARCHIVE_FILE} ${BACKUP_FILE}
+tar -czf ${ARCHIVE_FILE} backup.sql
 
 # Check if tar was successful
 if [ $? -ne 0 ]; then
@@ -29,6 +29,6 @@ if [ $? -ne 0 ]; then
 fi
 
 # Remove the uncompressed backup file
-rm ${BACKUP_FILE}
+rm backup.sql
 
 echo "Backup and compression successful: ${ARCHIVE_FILE}"

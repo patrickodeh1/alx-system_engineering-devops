@@ -10,9 +10,9 @@ get_dns_record() {
     local record=$(dig +short "$full_domain")
     
     if [ -z "$record" ]; then
-        echo "The subdomain $subdomain does not exist."
+        echo "The subdomain $subdomain does not exist"
     else
-        echo "The subdomain $subdomain is a A record and points to $record."
+        echo "The subdomain $subdomain is a A record and points to $record"
     fi
 }
 

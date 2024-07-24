@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-
 # This script displays DNS information for specified subdomains of a given domain.
-
 # Function to get DNS record
 get_dns_record() {
     local domain=$1

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#whoami
+USERNAME=$1
+su -c "whoami" "$USERNAME"

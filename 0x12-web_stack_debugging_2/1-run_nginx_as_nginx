@@ -4,7 +4,7 @@ if ! command -v nginx &>/dev/null; then
 	exit 1
 fi
 if ! id -u nginx &>/dev/null; then
-	useradd -r -s /sbin/nologin nginx
+	useradd -r -s /usr/sbin/nginx
 fi
 
 NGINX_CONF="/etc/nginx/nginx.conf"

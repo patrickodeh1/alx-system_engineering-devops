@@ -7,7 +7,7 @@ if ! id -u nginx &>/dev/null; then
 	useradd -r -s /sbin/nologin nginx
 fi
 
-NGINX_CONF="/etc/nginx/nginc.conf"
+NGINX_CONF="/etc/nginx/nginx.conf"
 
 if [ -f "$NGINX_CONF" ]; then
 	sed -i 's/^user.*/user nginx;/' "$NGINX_CONF"

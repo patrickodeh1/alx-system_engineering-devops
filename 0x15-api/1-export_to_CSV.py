@@ -42,8 +42,8 @@ def get_data(employee_id):
                 writer.writeheader()
                 for task in todo_data:
                     writer.writerow({
-                        "USER_ID": employee_id
-                        "USERNAME": employee_name
+                        "USER_ID": employee_id,
+                        "USERNAME": employee_name,
                         "TASK_COMPLETED_STATUS": task.get("completed"),
                         "TASK_TITLE": task.get("title")
                     })

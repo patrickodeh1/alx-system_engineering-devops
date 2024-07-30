@@ -5,7 +5,6 @@ import requests
 import sys
 
 
-
 def get_data(employee_id):
     try:
         user_url = (
@@ -30,12 +29,12 @@ def get_data(employee_id):
             writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 
             for task in todo_data:
-                writer.writerow({
+                writer.writerow([
                     employee_id,
                     employee_name,
                     task.get("completed"),
                     task.get("title")
-                })
+                ])
     except requests.exceptions.RequestException as e:
         pass
 

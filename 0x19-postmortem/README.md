@@ -52,5 +52,5 @@ We reconfigured the load balancer to share the traffic evenly, like a good host 
 
 ---
 
-For more details, visit the [GitHub repository](https://github.com/alx-system_engineering-devops/0x19-postmortem) and check out the [README.md](https://github.com/alx-system_engineering-devops/0x19-postmortem/blob/main/README.md) file.
+For more details, visit the [GitHub repository](https://github.com/patrickodeh1/alx-system_engineering-devops/tree/master/0x19-postmortem) and check out the [README.md](https://github.com/patrickodeh1/alx-system_engineering-devops/blob/master/0x19-postmortem/README.md) file.
 
